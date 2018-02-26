@@ -63,6 +63,17 @@ class Student
     end
   end
 
+  def self.all 
+    sql = <<-SQL
+      SELECT count(*)
+      FROM students
+      WHERE grade = ?
+    SQL
+    DB[:conn].execute(sql, grade).map do |row|
+      self.new_from_db(row)
+    end
+  end
+
   def save
     sql = <<-SQL
       INSERT INTO students (name, grade)
