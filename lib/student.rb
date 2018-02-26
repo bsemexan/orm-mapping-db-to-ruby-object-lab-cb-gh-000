@@ -60,7 +60,7 @@ class Student
     SQL
     DB[:conn].execute(sql, grade).map do |row|
       self.new_from_db(row)
-    end.size
+    end
   end
 
   def save
